@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Tienda online de productos tecnológicos y del hogar">
-    <title>LAWC Shop</title>
+    <meta name="description" content="Catalogo completo de productos - LAWC Shop">
+    <title>Catalogo | LAWC Shop</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,7 +27,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark" aria-label="Navegacion principal">
             <div class="container">
 
-                <a class="navbar-brand" href="#" id="brandLogo">
+                <a class="navbar-brand" href="index.html" id="brandLogo">
                     <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
                     <span data-i18n="brand">LAWC Shop</span>
                 </a>
@@ -53,10 +53,10 @@
 
                 <div class="collapse navbar-collapse order-lg-3" id="navMenu">
                     <ul class="navbar-nav ms-auto align-items-lg-center">
-                        <!-- Enlace al catalogo -->
+                        <!-- Enlace al index -->
                         <li class="nav-item">
-                            <a class="nav-link" href="catalogo.html">
-                                <i class="fa-solid fa-store" aria-hidden="true"></i> Catalogo
+                            <a class="nav-link" href="index.html">
+                                <i class="fa-solid fa-house" aria-hidden="true"></i> Inicio
                             </a>
                         </li>
                         <!-- Boton carrito -->
@@ -84,10 +84,24 @@
     <main class="main-content">
         <div class="container">
 
-            <!-- Titulo de la seccion de productos -->
-            <section class="section-header" aria-labelledby="productsTitle">
-                <h2 class="section-title" id="productsTitle" data-i18n="productsTitle">Nuestros Productos</h2>
-                <p class="section-subtitle" id="productsCount" data-i18n="productsCount"></p>
+            <!-- Titulo de la seccion de catalogo -->
+            <section class="section-header" aria-labelledby="catalogTitle">
+                <h2 class="section-title" id="catalogTitle">Catalogo de Productos</h2>
+                <p class="section-subtitle" id="catalogCount"></p>
+            </section>
+
+            <!-- Barra de herramientas: filtros y ordenamiento -->
+            <section class="catalog-toolbar" aria-label="Filtros y ordenamiento">
+                <div class="toolbar-group">
+                    <label for="sortSelect" class="toolbar-label">Ordenar por:</label>
+                    <select class="form-select toolbar-select" id="sortSelect" aria-label="Ordenar productos">
+                        <option value="default" selected>Por defecto</option>
+                        <option value="price-asc">Precio: menor a mayor</option>
+                        <option value="price-desc">Precio: mayor a menor</option>
+                        <option value="name-asc">Nombre: A - Z</option>
+                        <option value="name-desc">Nombre: Z - A</option>
+                    </select>
+                </div>
             </section>
 
             <!-- Grilla de productos -->
@@ -96,10 +110,21 @@
             </section>
 
             <!-- Mensaje de vacio / carga -->
-            <div class="products-state" id="productsState" hidden>
-                <i class="fa-solid fa-box-open state-icon" aria-hidden="true"></i>
+            <div class="products-state" id="productsState">
+                <i class="fa-solid fa-spinner fa-spin-pulse state-icon" aria-hidden="true"></i>
                 <p class="state-text" id="productsStateText">Cargando productos...</p>
             </div>
+
+            <!-- Paginacion -->
+            <nav class="catalog-pagination" id="catalogPagination" aria-label="Paginacion del catalogo" hidden>
+                <button type="button" class="btn pagination-btn" id="prevPageBtn" disabled aria-label="Pagina anterior">
+                    <i class="fa-solid fa-chevron-left" aria-hidden="true"></i> Anterior
+                </button>
+                <span class="pagination-info" id="paginationInfo">Pagina 1 de 1</span>
+                <button type="button" class="btn pagination-btn" id="nextPageBtn" disabled aria-label="Pagina siguiente">
+                    Siguiente <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                </button>
+            </nav>
 
         </div>
     </main>
@@ -151,7 +176,7 @@
 
         <div class="cart-empty" id="cartEmpty">
             <i class="fa-solid fa-cart-arrow-down empty-cart-icon" aria-hidden="true"></i>
-            <p data-i18n="cartEmpty">Tu carrito está vacío.</p>
+            <p data-i18n="cartEmpty">Tu carrito esta vacio.</p>
         </div>
 
         <div class="cart-sidebar-footer" id="cartFooter" hidden>
@@ -169,7 +194,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- Script principal -->
-    <script src="../JS/main.js"></script>
+    <!-- Script principal del catalogo -->
+    <script src="../JS/catalogo.js"></script>
 </body>
 </html>
