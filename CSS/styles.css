@@ -818,3 +818,460 @@ img {
         font-size: 0.8rem;
     }
 }
+
+/* ============================================================
+   11. Estilos - Selector de idioma
+   ============================================================ */
+.lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-left: 0.5rem;
+}
+
+.lang-btn {
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 50px;
+    padding: 0.35rem 0.85rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    transition: var(--transition-fast);
+    line-height: 1.2;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.lang-btn::after {
+    margin-left: 0;
+}
+
+.lang-btn .fa-globe {
+    font-size: 0.9rem;
+}
+
+.lang-btn:hover {
+    background-color: rgba(255, 255, 255, 0.20);
+    color: var(--color-white);
+    border-color: var(--color-white);
+}
+
+.lang-btn.active {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+    border-color: var(--color-white);
+}
+
+@media (max-width: 991.98px) {
+    .lang-toggle {
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
+}
+
+/* Menu desplegable del selector de idioma */
+.lang-menu {
+    min-width: 9rem;
+    padding: 0.35rem;
+    border: 1px solid var(--color-border, #e5e5e5);
+    border-radius: 0.75rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.lang-menu .lang-option {
+    border-radius: 0.5rem;
+    padding: 0.45rem 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-dark);
+    font-family: 'Poppins', sans-serif;
+}
+
+.lang-menu .lang-option:hover,
+.lang-menu .lang-option:focus {
+    background-color: var(--color-primary-light, #a29bfe);
+    color: var(--color-white);
+}
+
+@media (max-width: 991.98px) {
+    .lang-menu {
+        transform: translate3d(0, 3px, 0) !important;
+    }
+}
+
+/* ============================================================
+   12. Estilos - Checkout (stepper, pago y resumen)
+   ============================================================ */
+/* Pasos del checkout */
+.checkout-steps {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.checkout-step {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-light-gray);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: var(--transition-fast);
+}
+
+.checkout-step .step-num {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--color-light-gray);
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: var(--transition-fast);
+}
+
+.checkout-step.active {
+    color: var(--color-primary);
+}
+
+.checkout-step.active .step-num {
+    background-color: var(--color-primary);
+}
+
+/* Paneles del formulario */
+.checkout-form {
+    background-color: var(--color-white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: 1.5rem;
+}
+
+.checkout-pane.active {
+    display: block;
+}
+
+.checkout-pane[hidden],
+.checkout-pane:not(.active) {
+    display: none;
+}
+
+.checkout-pane-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: 1.25rem;
+}
+
+.checkout-pane-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+/* Opciones de metodo de pago */
+.payment-option {
+    border: 1px solid #eef0f5;
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: var(--color-bg);
+}
+
+.payment-option .form-check-label {
+    font-weight: 600;
+    color: var(--color-dark);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.payment-option .form-check-label i {
+    color: var(--color-primary);
+    font-size: 1.1rem;
+}
+
+.payment-option-body {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed #dfe3ec;
+}
+
+/* Codigo de pago en efectivo */
+.checkout-cash-code {
+    background-color: var(--color-white);
+    border: 2px dashed var(--color-primary-light);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.checkout-cash-code strong {
+    display: block;
+    font-size: 1.6rem;
+    letter-spacing: 2px;
+    color: var(--color-primary);
+    margin: 0.25rem 0;
+}
+
+/* Resumen del pedido */
+.checkout-summary {
+    background-color: var(--color-white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: 1.5rem;
+    position: sticky;
+    top: 1.5rem;
+}
+
+.checkout-summary-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid #eef0f5;
+    padding-bottom: 0.75rem;
+}
+
+.summary-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.9rem;
+}
+
+.summary-item-img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    background-color: var(--color-bg);
+    border-radius: var(--radius-sm);
+    padding: 0.15rem;
+    flex-shrink: 0;
+}
+
+.summary-item-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.summary-item-title {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--color-dark);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0.1rem;
+}
+
+.summary-item-qty {
+    font-size: 0.78rem;
+    color: var(--color-gray);
+}
+
+.summary-item-total {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    white-space: nowrap;
+}
+
+.checkout-summary-totals {
+    border-top: 1px solid #eef0f5;
+    padding-top: 1rem;
+    margin-top: 0.5rem;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--color-dark);
+}
+
+.summary-row strong {
+    color: var(--color-dark);
+}
+
+.summary-row.summary-total {
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-top: 1px solid #eef0f5;
+    padding-top: 0.75rem;
+    margin-top: 0.25rem;
+}
+
+.summary-total strong {
+    color: var(--color-primary);
+    font-size: 1.3rem;
+}
+
+/* Revisión del pedido */
+.checkout-review {
+    background-color: var(--color-bg);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.checkout-review-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: 0.5rem;
+}
+
+.checkout-review p {
+    font-size: 0.85rem;
+    color: var(--color-gray);
+}
+
+/* Responsive checkout */
+@media (max-width: 575.98px) {
+    .checkout-form {
+        padding: 1rem;
+    }
+
+    .checkout-summary {
+        position: static;
+    }
+}
+
+/* ============================================================
+   13. Estilos - Home (index)
+   ============================================================ */
+
+/* Hero */
+.home-hero {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark, #6c5ce7) 100%);
+    border-radius: 1rem;
+    color: #fff;
+    padding: 3rem 2rem;
+    margin: 2rem 0 3rem;
+    text-align: center;
+}
+
+.home-hero-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 0.75rem;
+}
+
+.home-hero-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 640px;
+    margin: 0 auto 1.5rem;
+}
+
+/* Secciones del home */
+.home-section {
+    margin-bottom: 3.5rem;
+}
+
+.home-section .section-title {
+    margin-bottom: 0.25rem;
+}
+
+.home-section .section-subtitle {
+    color: var(--color-gray);
+    margin-bottom: 1.75rem;
+}
+
+/* Contacto */
+.contact-section {
+    border-top: 1px solid var(--color-border, #e5e5e5);
+    padding-top: 3rem;
+}
+
+.contact-card {
+    background: var(--color-card-bg, #fff);
+    border: 1px solid var(--color-border, #e5e5e5);
+    border-radius: 1rem;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    color: var(--color-dark);
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-item i {
+    color: var(--color-primary);
+    font-size: 1.3rem;
+}
+
+@media (max-width: 767.98px) {
+    .contact-item {
+        justify-content: flex-start;
+    }
+}
+
+/* ============================================================
+   14. Estilos - Separacion nav, boton carrito, toast
+   ============================================================ */
+
+/* Separacion del selector de idioma y el carrito en el nav */
+.lang-toggle {
+    margin-right: 0.75rem;
+}
+
+.navbar .btn-cart {
+    margin-left: 0.5rem;
+}
+
+/* Boton "agregar al carrito" en las cards */
+.btn-add-to-cart {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: 50px;
+    padding: 0.45rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    white-space: nowrap;
+}
+
+.btn-add-to-cart:hover {
+    background-color: var(--color-primary-dark);
+    color: var(--color-white);
+    transform: translateY(-2px);
+}
+
+/* Toast de "producto agregado": posicionado un poco mas abajo
+   para que no tape el carrito (arriba a la derecha) */
+.toast-offset {
+    margin-top: 70px;
+}
+
+@media (max-width: 575.98px) {
+    .toast-offset {
+        margin-top: 55px;
+    }
+}

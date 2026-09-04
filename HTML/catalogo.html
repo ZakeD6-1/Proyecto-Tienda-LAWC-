@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Catalogo completo de productos - LAWC Shop">
-    <title>Catalogo | LAWC Shop</title>
+    <meta name="description" content="Catalogo completo de productos - FJ Shop">
+    <title>Catalogo | FJ Shop</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,7 +29,7 @@
 
                 <a class="navbar-brand" href="index.html" id="brandLogo">
                     <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
-                    <span data-i18n="brand">LAWC Shop</span>
+                    <span data-i18n="brand">FJ Shop</span>
                 </a>
 
                 <!-- Buscador -->
@@ -56,8 +56,22 @@
                         <!-- Enlace al index -->
                         <li class="nav-item">
                             <a class="nav-link" href="index.html">
-                                <i class="fa-solid fa-house" aria-hidden="true"></i> Inicio
+                                <i class="fa-solid fa-house" aria-hidden="true"></i> <span data-i18n="inicio">Inicio</span>
                             </a>
+                        </li>
+                        <!-- Selector de idioma -->
+                        <li class="nav-item lang-toggle">
+                            <div class="dropdown">
+                                <button type="button" class="btn lang-btn dropdown-toggle" id="langDropdownBtn"
+                                        data-bs-toggle="dropdown" aria-expanded="false" aria-label="Seleccionar idioma">
+                                    <i class="fa-solid fa-globe" aria-hidden="true"></i>
+                                    <span id="langCurrent">ES</span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end lang-menu">
+                                    <li><button type="button" class="dropdown-item lang-option" data-lang="es">Español</button></li>
+                                    <li><button type="button" class="dropdown-item lang-option" data-lang="en">English</button></li>
+                                </ul>
+                            </div>
                         </li>
                         <!-- Boton carrito -->
                         <li class="nav-item">
@@ -86,20 +100,20 @@
 
             <!-- Titulo de la seccion de catalogo -->
             <section class="section-header" aria-labelledby="catalogTitle">
-                <h2 class="section-title" id="catalogTitle">Catalogo de Productos</h2>
+                <h2 class="section-title" id="catalogTitle" data-i18n="catalogTitle">Catalogo de Productos</h2>
                 <p class="section-subtitle" id="catalogCount"></p>
             </section>
 
             <!-- Barra de herramientas: filtros y ordenamiento -->
             <section class="catalog-toolbar" aria-label="Filtros y ordenamiento">
                 <div class="toolbar-group">
-                    <label for="sortSelect" class="toolbar-label">Ordenar por:</label>
+                    <label for="sortSelect" class="toolbar-label" data-i18n="sortBy">Ordenar por:</label>
                     <select class="form-select toolbar-select" id="sortSelect" aria-label="Ordenar productos">
-                        <option value="default" selected>Por defecto</option>
-                        <option value="price-asc">Precio: menor a mayor</option>
-                        <option value="price-desc">Precio: mayor a menor</option>
-                        <option value="name-asc">Nombre: A - Z</option>
-                        <option value="name-desc">Nombre: Z - A</option>
+                        <option value="default" selected data-i18n="sortDefault">Por defecto</option>
+                        <option value="price-asc" data-i18n="sortPriceAsc">Precio: menor a mayor</option>
+                        <option value="price-desc" data-i18n="sortPriceDesc">Precio: mayor a menor</option>
+                        <option value="name-asc" data-i18n="sortNameAsc">Nombre: A - Z</option>
+                        <option value="name-desc" data-i18n="sortNameDesc">Nombre: Z - A</option>
                     </select>
                 </div>
             </section>
@@ -131,7 +145,7 @@
 
     <footer class="site-footer">
         <div class="container">
-            <p>&copy; <span id="year"></span> LAWC Shop. <span data-i18n="footerText">Todos los derechos reservados.</span></p>
+            <p>&copy; <span id="year"></span> FJ Shop. <span data-i18n="footerText">Todos los derechos reservados.</span></p>
         </div>
     </footer>
 
@@ -194,6 +208,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <!-- Script de internacionalizacion compartido -->
+    <script src="../JS/i18n.js"></script>
     <!-- Script principal del catalogo -->
     <script src="../JS/catalogo.js"></script>
 </body>
