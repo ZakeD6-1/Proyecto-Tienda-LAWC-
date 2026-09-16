@@ -1275,3 +1275,266 @@ img {
         margin-top: 55px;
     }
 }
+
+/* ============================================================
+   15. Estilos - Panel de administracion
+   ============================================================ */
+
+/* Login */
+.admin-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+
+.login-card {
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.login-icon {
+    font-size: 3rem;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+
+.login-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: 0.25rem;
+}
+
+.login-subtitle {
+    font-size: 0.9rem;
+    color: var(--color-gray);
+    margin-bottom: 1.5rem;
+}
+
+.login-card .form-label {
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: var(--color-dark);
+    text-align: left;
+}
+
+.login-card .input-group-text {
+    background-color: var(--color-bg);
+    border: 1px solid #e0e0e0;
+    border-right: none;
+    color: var(--color-gray);
+}
+
+.login-card .form-control {
+    border-left: none;
+}
+
+.login-card .form-control:focus {
+    box-shadow: none;
+    border-color: var(--color-primary-light);
+}
+
+/* Panel CRUD */
+.admin-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.btn-add-product {
+    background-color: var(--color-success);
+    border-color: var(--color-success);
+    border-radius: 50px;
+    padding: 0.5rem 1.25rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: var(--transition-fast);
+}
+
+.btn-add-product:hover {
+    background-color: #00a381;
+    border-color: #00a381;
+    color: var(--color-white);
+}
+
+/* Tabla de administracion */
+.admin-table-wrapper {
+    background-color: var(--color-white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    overflow-x: auto;
+}
+
+.admin-table {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+}
+
+.admin-table thead {
+    background-color: var(--color-bg);
+}
+
+.admin-table th {
+    font-weight: 600;
+    color: var(--color-dark);
+    border-bottom: 2px solid #eef0f5;
+    white-space: nowrap;
+    padding: 0.85rem 1rem;
+}
+
+.admin-table td {
+    vertical-align: middle;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f0f2f7;
+}
+
+.admin-th-img {
+    width: 70px;
+}
+
+.admin-th-actions {
+    width: 110px;
+    text-align: center;
+}
+
+.admin-td-img {
+    width: 70px;
+}
+
+.admin-product-img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    background-color: var(--color-bg);
+    border-radius: var(--radius-sm);
+    padding: 0.2rem;
+}
+
+.admin-td-title {
+    font-weight: 600;
+    color: var(--color-dark);
+    max-width: 280px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.admin-td-price {
+    font-weight: 700;
+    color: var(--color-primary);
+    white-space: nowrap;
+}
+
+.admin-td-actions {
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Botones de accion de la tabla */
+.btn-admin-action {
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    margin: 0 0.15rem;
+}
+
+.btn-admin-edit {
+    background-color: rgba(108, 92, 231, 0.12);
+    color: var(--color-primary);
+}
+
+.btn-admin-edit:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    transform: scale(1.1);
+}
+
+.btn-admin-delete {
+    background-color: rgba(231, 76, 60, 0.12);
+    color: var(--color-danger);
+}
+
+.btn-admin-delete:hover {
+    background-color: var(--color-danger);
+    color: var(--color-white);
+    transform: scale(1.1);
+}
+
+/* Estado vacio del admin */
+.admin-empty {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    color: var(--color-gray);
+}
+
+/* Preview de imagen en el formulario */
+.image-preview-wrapper {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.image-preview {
+    max-width: 180px;
+    max-height: 180px;
+    object-fit: contain;
+    border-radius: var(--radius-sm);
+    border: 2px solid #eef0f5;
+    padding: 0.25rem;
+}
+
+/* Responsive admin */
+@media (max-width: 767.98px) {
+    .login-card {
+        margin: 1rem;
+        padding: 2rem 1.25rem;
+    }
+
+    .admin-panel-header {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .admin-th-img,
+    .admin-td-img {
+        display: none;
+    }
+
+    .admin-td-title {
+        max-width: 160px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .admin-table {
+        font-size: 0.8rem;
+    }
+
+    .admin-table th,
+    .admin-table td {
+        padding: 0.6rem 0.5rem;
+    }
+
+    .btn-admin-action {
+        width: 30px;
+        height: 30px;
+        font-size: 0.75rem;
+    }
+}
