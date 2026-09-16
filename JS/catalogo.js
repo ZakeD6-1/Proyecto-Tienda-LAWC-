@@ -12,6 +12,7 @@
     const PRODUCTS_PER_PAGE = 8;
     const CART_STORAGE_KEY = 'lawc-cart';
     const OLD_CART_STORAGE_KEY = 'lawc_cart';
+    const ADMIN_PRODUCTS_KEY = 'lawc-admin-products';
 
     const dom = {
         searchInput: document.getElementById('searchInput'),
@@ -209,14 +210,33 @@
         fetch(API_BASE + '/products')
             .then(function (res) { return res.json(); })
             .then(function (data) {
-                allProducts = data;
+                var adminProducts = loadAdminProducts();
+                allProducts = data.concat(adminProducts);
                 filteredProducts = allProducts.slice();
                 hideState();
                 renderProducts();
             })
             .catch(function () {
-                showState(I18N.t('productsError'), 'fa-triangle-exclamation');
+                // Si falla la API, mostrar al menos los productos del admin
+                var adminProducts = loadAdminProducts();
+                allProducts = adminProducts;
+                filteredProducts = allProducts.slice();
+                if (allProducts.length === 0) {
+                    showState(I18N.t('productsError'), 'fa-triangle-exclamation');
+                } else {
+                    hideState();
+                    renderProducts();
+                }
             });
+    }
+
+    function loadAdminProducts() {
+        try {
+            var raw = localStorage.getItem(ADMIN_PRODUCTS_KEY);
+            return raw ? JSON.parse(raw) : [];
+        } catch (e) {
+            return [];
+        }
     }
 
     /* ========================

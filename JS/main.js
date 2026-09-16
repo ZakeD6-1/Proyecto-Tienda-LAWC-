@@ -20,6 +20,7 @@ const PRODUCTS_URL = API_BASE + '/api/products';
 const CART_STORAGE_KEY = 'lawc-cart';
 const OLD_CART_STORAGE_KEY = 'lawc_cart';
 const LANG_STORAGE_KEY = 'lawc-lang';
+const ADMIN_PRODUCTS_KEY = 'lawc-admin-products';
 
 // Cantidad de productos mostrados en cada seccion del home
 const FEATURED_COUNT = 4;
@@ -108,19 +109,38 @@ async function loadData() {
     setState(elements.featuredState, elements.featuredStateText, I18N.t('productsLoading'));
     setState(elements.newState, elements.newStateText, I18N.t('productsLoading'));
     try {
-        allProducts = await fetchProducts();
+        const apiProducts = await fetchProducts();
+        const adminProducts = loadAdminProducts();
+        allProducts = apiProducts.concat(adminProducts);
         renderHome();
         I18N.applyI18n();
     } catch (error) {
         console.error(error);
-        setState(elements.featuredState, elements.featuredStateText, I18N.t('productsError'));
-        setState(elements.newState, elements.newStateText, I18N.t('productsError'));
+        // Si falla la API, mostrar al menos los productos del admin
+        const adminProducts = loadAdminProducts();
+        allProducts = adminProducts;
+        if (allProducts.length === 0) {
+            setState(elements.featuredState, elements.featuredStateText, I18N.t('productsError'));
+            setState(elements.newState, elements.newStateText, I18N.t('productsError'));
+        } else {
+            renderHome();
+            I18N.applyI18n();
+        }
         Swal.fire({
             icon: 'error',
             title: I18N.t('productsError'),
             text: error.message,
             confirmButtonColor: '#6c5ce7',
         });
+    }
+}
+
+function loadAdminProducts() {
+    try {
+        var raw = localStorage.getItem(ADMIN_PRODUCTS_KEY);
+        return raw ? JSON.parse(raw) : [];
+    } catch (e) {
+        return [];
     }
 }
 
