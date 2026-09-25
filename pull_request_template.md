@@ -33,7 +33,7 @@ assignees: ''
 
 <!-- Escribí qué archivos tocaste -->
 
-- `HTML/`
+- `*.html` (raíz)
 - `CSS/`
 - `JS/`
 - Otros:

@@ -38,6 +38,8 @@
         imagePreviewWrapper: document.getElementById('imagePreviewWrapper'),
         imagePreview: document.getElementById('imagePreview'),
         year: document.getElementById('year'),
+        langCurrent: document.getElementById('langCurrent'),
+        langOptions: document.querySelectorAll('.lang-option'),
     };
 
     var bootstrapModal = null;
@@ -50,9 +52,35 @@
         dom.year.textContent = new Date().getFullYear();
         bootstrapModal = new bootstrap.Modal(dom.productFormModal);
 
+        updateLangToggle();
+        I18N.applyI18n();
+
         initEventListeners();
+        bindLanguageButtons();
         checkSession();
     });
+
+    /* ========================
+       Idioma (i18n)
+       ======================== */
+    function updateLangToggle() {
+        var current = I18N.getLang();
+        if (dom.langCurrent) dom.langCurrent.textContent = current === 'es' ? 'ES' : 'EN';
+    }
+
+    function bindLanguageButtons() {
+        dom.langOptions.forEach(function (btn) {
+            btn.addEventListener('click', function () { changeLanguage(btn.getAttribute('data-lang')); });
+        });
+    }
+
+    function changeLanguage(lang) {
+        I18N.setLanguage(lang);
+        updateLangToggle();
+        I18N.applyI18n();
+        // La tabla y el estado vacio contienen textos traducidos
+        if (!dom.adminPanel.hidden) renderProducts();
+    }
 
     /* ========================
        Event Listeners
@@ -85,17 +113,18 @@
             showPanel();
             Swal.fire({
                 icon: 'success',
-                title: 'Bienvenido, Admin',
+                title: I18N.t('adminWelcome'),
                 timer: 1500,
                 showConfirmButton: false,
                 toast: true,
                 position: 'top-end',
+                customClass: { container: 'toast-offset' },
             });
         } else {
             Swal.fire({
                 icon: 'error',
-                title: 'Credenciales incorrectas',
-                text: 'Intenta de nuevo.',
+                title: I18N.t('adminInvalidCreds'),
+                text: I18N.t('adminTryAgain'),
                 confirmButtonColor: '#6c5ce7',
             });
         }
@@ -168,10 +197,10 @@
                 '<td>' + formatCategory(product.category) + '</td>' +
                 '<td class="admin-td-price">$' + Number(product.price).toFixed(2) + '</td>' +
                 '<td class="admin-td-actions">' +
-                    '<button type="button" class="btn-admin-action btn-admin-edit" data-edit="' + product.id + '" aria-label="Editar ' + escapeHtml(product.title) + '">' +
+                    '<button type="button" class="btn-admin-action btn-admin-edit" data-edit="' + product.id + '" aria-label="' + I18N.t('adminEditAria') + ': ' + escapeHtml(product.title) + '">' +
                         '<i class="fa-solid fa-pen-to-square"></i>' +
                     '</button>' +
-                    '<button type="button" class="btn-admin-action btn-admin-delete" data-delete="' + product.id + '" aria-label="Eliminar ' + escapeHtml(product.title) + '">' +
+                    '<button type="button" class="btn-admin-action btn-admin-delete" data-delete="' + product.id + '" aria-label="' + I18N.t('remove') + ': ' + escapeHtml(product.title) + '">' +
                         '<i class="fa-solid fa-trash-can"></i>' +
                     '</button>' +
                 '</td>';
@@ -219,14 +248,14 @@
 
     function deleteProduct(id, title) {
         Swal.fire({
-            title: 'Eliminar producto',
-            text: 'Seguro que deseas eliminar "' + title + '"?',
+            title: I18N.t('adminDeleteTitle'),
+            text: I18N.t('adminDeleteConfirm').replace('{title}', title),
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#e74c3c',
             cancelButtonColor: '#636e72',
-            confirmButtonText: 'Si, eliminar',
-            cancelButtonText: 'Cancelar',
+            confirmButtonText: I18N.t('adminDeleteYes'),
+            cancelButtonText: I18N.t('adminCancel'),
         }).then(function (result) {
             if (result.isConfirmed) {
                 var products = loadProducts();
@@ -235,7 +264,7 @@
                 renderProducts();
                 Swal.fire({
                     icon: 'success',
-                    title: 'Producto eliminado',
+                    title: I18N.t('adminProductDeleted'),
                     timer: 1500,
                     showConfirmButton: false,
                 });
@@ -251,7 +280,7 @@
 
         if (product) {
             editingId = product.id;
-            document.getElementById('productFormModalTitle').textContent = 'Editar producto';
+            document.getElementById('productFormModalTitle').textContent = I18N.t('adminEditProduct');
             dom.formTitle.value = product.title;
             dom.formPrice.value = product.price;
             dom.formCategory.value = product.category;
@@ -260,7 +289,7 @@
             handleImagePreview();
         } else {
             editingId = null;
-            document.getElementById('productFormModalTitle').textContent = 'Agregar producto';
+            document.getElementById('productFormModalTitle').textContent = I18N.t('adminAddProduct');
         }
 
         bootstrapModal.show();
@@ -284,21 +313,23 @@
             editProduct(editingId, data);
             Swal.fire({
                 icon: 'success',
-                title: 'Producto actualizado',
+                title: I18N.t('adminProductUpdated'),
                 timer: 1500,
                 showConfirmButton: false,
                 toast: true,
                 position: 'top-end',
+                customClass: { container: 'toast-offset' },
             });
         } else {
             addProduct(data);
             Swal.fire({
                 icon: 'success',
-                title: 'Producto agregado',
+                title: I18N.t('adminProductAdded'),
                 timer: 1500,
                 showConfirmButton: false,
                 toast: true,
                 position: 'top-end',
+                customClass: { container: 'toast-offset' },
             });
         }
 
@@ -333,10 +364,10 @@
        ======================== */
     function formatCategory(cat) {
         var labels = {
-            electronics: 'Electronica',
-            jewelery: 'Joyeria',
-            "men's clothing": 'Ropa Hombre',
-            "women's clothing": 'Ropa Mujer',
+            electronics: I18N.t('catElectronics'),
+            jewelery: I18N.t('catJewelery'),
+            "men's clothing": I18N.t('catMensClothing'),
+            "women's clothing": I18N.t('catWomensClothing'),
         };
         return labels[cat] || cat.charAt(0).toUpperCase() + cat.slice(1);
     }
