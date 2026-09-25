@@ -54,6 +54,7 @@ const elements = {
     modalPrice: $('#modalPrice'),
     modalDescription: $('#modalDescription'),
     modalAddCart: $('#modalAddCart'),
+    productModalTitle: $('#productModalTitle'),
     year: $('#year'),
     brandLogo: $('#brandLogo'),
     langCurrent: $('#langCurrent'),
@@ -201,6 +202,7 @@ function renderHome() {
     renderFeatured();
     renderNew();
     bindAddCartButtons();
+    bindProductCardClicks();
     I18N.applyI18n();
 }
 
@@ -247,6 +249,26 @@ function bindAddCartButtons() {
     });
 }
 
+// Abre el modal de detalle al hacer clic o al presionar Enter/Espacio sobre la card
+function bindProductCardClicks() {
+    $$('.product-card[data-id]').forEach((card) => {
+        const id = Number(card.dataset.id);
+        const product = findProduct(id);
+
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('aria-label', I18N.t('viewMore') + ': ' + (product ? product.title : ''));
+
+        card.addEventListener('click', () => openProductModal(id));
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openProductModal(id);
+            }
+        });
+    });
+}
+
 function showAddedToast(product) {
     Swal.fire({
         icon: 'success',
@@ -273,6 +295,7 @@ function openProductModal(id) {
     if (!product) return;
 
     // Titulo del modal
+    elements.productModalTitle.textContent = product.title;
     elements.modalName.textContent = product.title;
     elements.modalPrice.textContent = formatPrice(product.price);
     elements.modalDescription.textContent = product.description;

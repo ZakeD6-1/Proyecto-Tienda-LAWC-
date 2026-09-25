@@ -17,7 +17,7 @@
 - Carrito lateral con localStorage (`lawc-cart`, con migración automática de la clave vieja `lawc_cart`): badge de unidades, −/+, eliminar, total por producto, eliminar todos
 - Buscador en tiempo real y navegación por categorías
 - Mensajes con SweetAlert2 e internacionalización ES/EN
-- Checkout en varios pasos (`HTML/checkout.html` + `JS/checkout.js`): datos personales y entrega, método de pago (efectivo PagoFácil/RapiPago con código de pago, tarjeta de crédito y débito), revisión y confirmación
+- Checkout en varios pasos (`checkout.html` + `JS/checkout.js`): datos personales y entrega, método de pago (efectivo PagoFácil/RapiPago con código de pago, tarjeta de crédito y débito), revisión y confirmación
 - Selector de idioma ES/EN compartido (`JS/i18n.js`) en Index, Catálogo y Checkout, con persistencia en localStorage
 
 ## Julian Emanuel Guajardo Luchesi — JulianIstea
